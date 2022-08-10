@@ -2,17 +2,22 @@ const Moralis = require("moralis/node");
 require("dotenv").config();
 const contractAddresses = require("./constants/networkMapping.json");
 let chainId = process.env.chainId || 31337;
-const contractAddress = contractAddresses[chainId]["NftMarketplace"];
+const contractAddressArray = contractAddresses[chainId]["NftMarketplace"];
+const contractAddress = contractAddressArray[contractAddressArray.length - 1]
 /*As moralis understands local chain as 1337 */
 let moralisChainId = chainId == "31337" ? "1337" : chainId;
 
 const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
-const appID = process.env.NEXT_PUBLIC_APP_ID;
+const appId = process.env.NEXT_PUBLIC_APP_ID;
 const masterKey = process.env.masterKey;
 
+
+
 async function main() {
-  await Moralis.start({ serverUrl, appID, masterKey });
-  console.log("Working with moralis server..");
+    await Moralis.start({ serverUrl, appId, masterKey });
+      
+    console.log(`Working with contract address ${contractAddress}`)
+
 
   let itemListedOptions = {
     /*We can do this manually also so we have to request only those attributes which we find while doing manually */
@@ -124,6 +129,25 @@ let itemCanceledOptions = {
     "type": "event"
   },
   tableName: "ItemCanceled",
+}
+
+
+/*List responses */
+const listedResponse = await Moralis.Cloud.run('watchContractEvent',itemListedOptions,{
+  useMasterKey: true,
+});
+const boughtResponse = await Moralis.Cloud.run("watchContractEvent", itemBoughtOptions, {
+  useMasterKey: true,
+})
+const canceledResponse = await Moralis.Cloud.run("watchContractEvent", itemCanceledOptions, {
+  useMasterKey: true,
+});
+
+/*Will console success if and only if all three  tables will be created and no table should be present at the server */
+if (listedResponse.success && canceledResponse.success && boughtResponse.success) {
+  console.log("Success! Database Updated with watching events")
+} else {
+  console.log("Something went wrong...")
 }
 }
 

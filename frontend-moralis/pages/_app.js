@@ -1,4 +1,3 @@
-require('dotenv').config()
 import "../styles/globals.css";
 import { MoralisProvider } from "react-moralis";
 import Header from "../components/Header";
@@ -20,7 +19,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="description" content="Nft Market Place" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MoralisProvider initializeOnMount={true} appId="ZzLfAlSeHiArUxv3dscU5eye6ymV37OjnGq109yK" serverUrl="https://ij22o2kwus0l.usemoralis.com:2053/server">
+      <MoralisProvider initializeOnMount={true} appId={APP_ID} serverUrl={SERVER_URL}>
         <Header />
         <Component {...pageProps} />
       </MoralisProvider>

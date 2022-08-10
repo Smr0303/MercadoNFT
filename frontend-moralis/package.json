@@ -11,6 +11,7 @@
     "moralis:cloud": "moralis-admin-cli watch-cloud-folder --moralisSubdomain ij22o2kwus0l.usemoralis.com--autoSave 1 --moralisCloudfolder ./cloudFunctions"
   },
   "dependencies": {
+    "fs": "^0.0.1-security",
     "moralis": "^1.5.11",
     "next": "12.2.4",
     "react": "18.2.0",
