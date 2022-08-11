@@ -21,9 +21,10 @@ async function main() {
 
   let itemListedOptions = {
     /*We can do this manually also so we have to request only those attributes which we find while doing manually */
-    chanId: moralisChainId,
-    sync_historical: true, // If true it keeps the memory of all the emitted events
-    topic: "ItemListed(address,address,uint256,uint256)", // We pass the event
+    // Moralis understands a local chain is 1337
+    chainId: moralisChainId,
+    sync_historical: true,
+    topic: "ItemListed(address,address,uint256,uint256)",
     address: contractAddress,
     abi: {
       "anonymous": false,
@@ -142,6 +143,8 @@ const boughtResponse = await Moralis.Cloud.run("watchContractEvent", itemBoughtO
 const canceledResponse = await Moralis.Cloud.run("watchContractEvent", itemCanceledOptions, {
   useMasterKey: true,
 });
+
+console.log(listedResponse,canceledResponse,boughtResponse);
 
 /*Will console success if and only if all three  tables will be created and no table should be present at the server */
 if (listedResponse.success && canceledResponse.success && boughtResponse.success) {

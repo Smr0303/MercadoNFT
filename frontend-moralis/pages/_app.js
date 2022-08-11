@@ -13,7 +13,6 @@ const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 function MyApp({ Component, pageProps }) {
   return (
     <>
-    {console.log(APP_ID + " is available on " + SERVER_URL)}
       <Head>
         <title>Nft-Markt</title>
         <meta name="description" content="Nft Market Place" />

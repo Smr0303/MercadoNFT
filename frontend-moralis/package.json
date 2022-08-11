@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "moralis:sync": "moralis-admin-cli connect-local-devchain --chain hardhat --moralisSubdomain ij22o2kwus0l.usemoralis.com --frpcPath ./frp/frpc",
-    "moralis:cloud": "moralis-admin-cli watch-cloud-folder --moralisSubdomain ij22o2kwus0l.usemoralis.com--autoSave 1 --moralisCloudfolder ./cloudFunctions"
+    "moralis:cloud": "moralis-admin-cli watch-cloud-folder  --moralisSubdomain kobq3uhjhgmp.usemoralis.com --autoSave 1 --moralisCloudfolder ./cloudFunctions"
   },
   "dependencies": {
     "fs": "^0.0.1-security",
