@@ -32,6 +32,7 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
     const hideModal = () => setShowModal(false)
     const dispatch = useNotification()
 
+    /*Here we use the on Chain functions to buy and list items */
     const { runContractFunction: getTokenURI } = useWeb3Contract({
         abi: nftAbi,
         contractAddress: nftAddress,
@@ -45,7 +46,7 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
         abi: nftMarketplaceAbi,
         contractAddress: marketplaceAddress,
         functionName: "buyItem",
-        msgValue: price,
+        msgValue: price,//  passing the current nft amount
         params: {
             nftAddress: nftAddress,
             tokenId: tokenId,
