@@ -1,14 +1,16 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { useMoralisQuery } from "react-moralis";
+import { useMoralisQuery ,useMoralis} from "react-moralis";
+import NFTBox from "../components/Nft-Box";
 
 export default function Home() {
-  const { data: listedNfts, isFetching: fetchinfListedNfts } = useMoralisQuery(
+  const {isWeb3Enabled,account}= useMoralis();
+  const { data:listedNfts, isFetching: fetchinfListedNfts } = useMoralisQuery(
     "ActiveItem",
     (query) => query.limit(10).descending("tokenId")
   );
-
+  
   {
     /*So what we want is to get the list of all listed nfts show on home page
 But their will be a lot of mappings and if we change it into an array it would be gas expensive as we have to traverse on chain

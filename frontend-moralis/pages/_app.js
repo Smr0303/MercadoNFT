@@ -9,7 +9,6 @@ const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 /*We can connect by frpc but we will use moralis-admin-cli to connect to localchain */
 
-
 function MyApp({ Component, pageProps }) {
   return (
     <>
@@ -18,9 +17,15 @@ function MyApp({ Component, pageProps }) {
         <meta name="description" content="Nft Market Place" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MoralisProvider initializeOnMount={true} appId={APP_ID} serverUrl={SERVER_URL}>
-        <Header />
-        <Component {...pageProps} />
+      <MoralisProvider
+        initializeOnMount={true}
+        appId={APP_ID}
+        serverUrl={SERVER_URL}
+      >
+        <NotificationProvider>
+          <Header />
+          <Component {...pageProps} />
+        </NotificationProvider>
       </MoralisProvider>
     </>
   );
