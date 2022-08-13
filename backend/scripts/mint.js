@@ -1,6 +1,6 @@
 const { ethers, network } = require("hardhat")
 const { moveBlocks, sleep } = require("../utils/move-blocks")
-const PRICE = ethers.utils.parseEther("0.5")
+const PRICE = ethers.utils.parseEther("0.0016")
 
 async function mintAndList() {
   const nftMarketPlace = await ethers.getContract("nftMarketplace")
@@ -20,7 +20,7 @@ async function mintAndList() {
 
   if (network.config.chainId === 31337) {
     /*Moralis has a hard time if we mine more than 1 block */
-    await moveBlocks(1, (sleeAmount = 1000)) // We are doing so that the itemListed events get confirmed and we dont have to wait
+    await moveBlocks(1, (sleepAmount = 1000)) // We are doing so that the itemListed events get confirmed and we dont have to wait
   }
 }
 
